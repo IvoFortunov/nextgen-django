@@ -1,0 +1,51 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+
+  <!-- Main Section -->
+  <main class="settingsPage profile my-md">
+    <div class="container">
+      <div class="layout">
+        <div class="column column--1of3">
+          <div class="card text-center">
+            <div class="card__body dev">
+              <img src="{% static 'images/logo.jpg' %}" />
+             
+              <p class="dev__location">Адрес: {{about.address}}</p>
+              <p class="dev__location">Моб: <a href="tel:{{about.mobile}}">{{about.mobile}}</a></p>
+              <p class="dev__location">Email: <a href="mailto:{{about.email}}">{{about.email}}</a></p>
+
+             <ul class="dev__social">
+               
+                <li>
+                <a title="Facebook" href="{{about.social_facebook}}" target="_blank"><i class="zmdi zmdi-facebook zmdi-hc-lg"></i></a>
+                </li>
+
+
+                <li>
+                <a title="Facebook" href="{{about.social_instagram}}" target="_blank"><i class="zmdi zmdi-instagram zmdi-hc-lg"></i></a>
+                </li>
+
+              </ul>
+             
+            </div>
+          </div>
+        </div>
+        <div class="column column--2of3">
+          <div class="devInfo">
+            <h3 class="devInfo__title">За Нас</h3>
+            <p class="devInfo__about">
+              {{about.description|linebreaksbr}}
+            </p>
+          </div>
+
+        </div>
+          
+        </div>
+      </div>
+    </div>
+  </main>
+
+
+{% endblock content %}

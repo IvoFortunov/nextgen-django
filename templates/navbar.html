@@ -1,0 +1,152 @@
+{% load static %}
+
+<!-- Header Section -->
+<header class="header">
+    <div class="container container--narrow">
+      <a href="{% url 'news' %}" class="header__logo">
+        <img src="{% static 'images/logo.jpg' %}" alt="NextGen Logo" />
+      </a>
+      <nav class="header__nav">
+        <input type="checkbox" id="responsive-menu" />
+        <label for="responsive-menu" class="toggle-menu">
+          <span>Menu</span>
+          <div class="toggle-menu__lines"></div>
+        </label>
+        <ul class="header__menu">
+
+          <div class="dropdown">
+            <button onclick="show_hide_about()" class="menu__button_transparent">За нас</button>
+      
+            <!-- dropdown list items will show when we click the drop button -->
+            <div id="list-about" class="dropdown-content">
+               <a href="{% url 'about' %}">За клуба</a></li>
+               <a href="{% url 'programs' %}">Програми</a></li>
+            </div>
+          </div>
+          
+          <li class="header__menuItem"><a href="{% url 'news' %}">Новини</a></li>
+          <li class="header__menuItem"><a href="{% url 'coaches' %}">Треньори</a></li>
+          
+          <div class="dropdown">
+            <button onclick="show_hide_players()" class="menu__button_transparent">Играчи</button>
+      
+            <!-- dropdown list items will show when we click the drop button -->
+            <div id="list-players" class="dropdown-content">
+               <a href="{% url 'players' %}">Всички</a></li>
+               <a href="{% url 'presentations' %}">Представяния</a></li>
+               <a href="{% url 'playersotw' %}">Играчи на седмицата</a></li>
+            </div>
+          </div>
+
+         
+          {% if request.user.is_authenticated %}
+          <div class="dropdown">
+            <button onclick="show_hide_marks()" class="menu__button_transparent">Дневник</button>
+      
+            <!-- dropdown list items will show when we click the drop button -->
+            <div id="list-marks" class="dropdown-content">
+               <a href="{% url 'week-evaluations' %}"> Седмични оценки </a>
+               <a href="{% url 'common-evaluations' %}"> Общи(Профил) </a>
+               <a href="{% url 'match-evaluations' %}"> Мачове </a>
+               <a href="{% url 'daily-evaluations' %}"> Тренировки </a>
+               <a href="{% url 'conditioning-evaluations' %}"> Кондиционни </a>
+            </div>
+          </div>
+
+          <div class="dropdown">
+            <button onclick="show_hide_profile()" class="btn menu__button btn--md">{{request.user.first_name}}</button>
+      
+            <!-- dropdown list items will show when we click the drop button -->
+            <div id="list-profile" class="dropdown-content">
+               <a href="{% url 'account' %}"> Профил </a>
+               <a href="{% url 'inbox' %}"> Съобщения </a>
+            </div>
+          </div>
+          
+          {% if request.user.is_staff %}
+          <div class="dropdown">
+            <button onclick="show_hide_admin()" class="btn menu__button btn--md">Админ</button>
+      
+            <!-- dropdown list items will show when we click the drop button -->
+            <div id="list-admin" class="dropdown-content">
+               <a href="{% url 'create-player' %}"> Добави играч </a>
+               <a href="{% url 'create-coach' %}"> Добави треньор </a>
+               <a href="{% url 'news-admin' %}"> Новини </a>
+               <a href="{% url 'programs-admin' %}"> Програми </a>
+               <a href="{% url 'edit-about' %}"> Редактирай "За нас" </a>
+               <a href="{% url 'playersotwadmin' %}"> Играч на седмицата </a>
+            </div>
+          </div>
+          {% endif %}
+          <li class="header__menuItem"><a href="{% url 'logout' %}" class="btn btn--sub btn--md">Изход</a></li>
+          {% else %}
+          <li class="header__menuItem"><a href="{% url 'login' %}" class="btn btn--sub btn--md">Вход</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <script>
+    /* When the user clicks on the button, 
+    toggle between hiding and showing the dropdown content */
+    function show_hide_marks() {
+      closeAllMenus();
+      document.getElementById("list-marks").classList.toggle("show_marks");
+      
+    }
+
+    function show_hide_admin() {
+      closeAllMenus();
+      document.getElementById("list-admin").classList.toggle("show_admin");
+      
+    }
+
+    function show_hide_profile() {
+      closeAllMenus();
+      document.getElementById("list-profile").classList.toggle("show_profile");
+      
+    }
+
+    function show_hide_players() {
+      closeAllMenus();
+      document.getElementById("list-players").classList.toggle("show_players");
+      
+    }
+
+    function show_hide_about() {
+      closeAllMenus();
+      document.getElementById("list-about").classList.toggle("show_about");
+      
+    }
+
+     // Close the dropdown if the user clicks outside of it
+     window.onclick = function(event) {
+      if (!event.target.matches('.menu__button') && !event.target.matches('.menu__button_transparent')) {
+        closeAllMenus();
+      }
+    }
+
+    function closeAllMenus(){
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show_marks')) {
+            openDropdown.classList.remove('show_marks');
+          }
+          if (openDropdown.classList.contains('show_admin')) {
+            openDropdown.classList.remove('show_admin');
+          }
+          if (openDropdown.classList.contains('show_profile')) {
+            openDropdown.classList.remove('show_profile');
+          }
+          if (openDropdown.classList.contains('show_players')) {
+            openDropdown.classList.remove('show_players');
+          }
+          if (openDropdown.classList.contains('show_about')) {
+            openDropdown.classList.remove('show_about');
+          }
+        }
+    }
+    </script>

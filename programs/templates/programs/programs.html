@@ -1,0 +1,28 @@
+{% extends 'main.html' %}
+
+{% block content %}
+ <section class="newslist">
+    <div class="container">
+      <div class="grid grid--three">
+        {% for p in programs %}
+        <div class="column card">
+          <div class="news">
+            <a href="{% url 'program-detail' p.id %}" class="card__body">
+              <div class="news__profile">
+                <img class="programs__thumbnail" src="{{ p.image.url }}" alt="image" />                
+              </div>
+              <div class="news__meta">
+                <h3>{{p.name}}</h3>
+              </div>
+              
+            </a>
+          </div>
+        </div>
+        {% endfor %}
+          
+          
+      </div>
+    </div>
+  </section>
+
+{% endblock content %}

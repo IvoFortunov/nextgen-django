@@ -1,0 +1,59 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<style>
+    input[type='text'],
+    input[type='email'],
+    input[type='password'] {
+        min-width: 24rem;
+        width: 100%;
+        padding: 1.2rem 1.5rem;
+        border-radius: 0.5rem;
+        border: 2px solid var(--color-light);
+        transition: all 0.3s ease-in-out;
+        background-color: var(--color-bg);
+    }
+
+    input[type='text']:focus,
+    input[type='email']:focus,
+    input[type='password']:focus,
+    input[type='text']:active,
+    input[type='email']:active,
+    input[type='password']:active {
+        outline: none;
+        border: 2px solid var(--color-main);
+    }
+</style>
+
+
+<!-- Main Section -->
+<main class="formPage my-xl">
+    <div class="content-box">
+        <div class="formWrapper">
+            <h3>Въведете нова парола</h3>
+
+            <p>Моля въведете паролата си два пъти като проверите двете пароли да съвпадат.</p>
+
+            <br>
+
+            <form class="form" method="POST">
+                {% csrf_token %}
+                <!-- {{form.as_p}} -->
+               
+                <div class="form__field">
+                    <label for="formInput#text">Нова парола: </label>
+                    {{form.new_password1}}
+                </div>        
+                <div class="form__field">
+                    <label for="formInput#text">Повтори парола: </label>
+                    {{form.new_password2}}
+                </div>           
+              
+                <input class="btn btn--sub btn--lg  my-md" type="submit" value="Запиши" />
+            </form>
+        </div>
+    </div>
+</main>
+
+{% endblock content %}

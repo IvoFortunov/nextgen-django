@@ -1,0 +1,89 @@
+<head>
+    <style>
+        tr{
+            border-bottom: 1px solid #898585;
+        }
+    </style>
+</head>
+
+<div>
+    <h2>{{evaluation.player.name}} беше оценен/а от {{evaluation.coach.name}}</h2>
+    <h3>Седмица: {{evaluation.week}} , {{evaluation.year}} година</h3>
+    <h3>Тема на седмицата: {{evaluation.topic}}</h3>
+
+    <table>
+        <tr>
+            <th>Критерии</th>
+            <th>Играч</th>
+            <th>Треньор</th>
+        </tr>
+        <tr>
+            <td>
+                <p>Мотивация</p>
+            </td>
+            <td align="center">
+                {{evaluation.player_motivation}}
+            </td>
+            <td align="center">
+                {{evaluation.coach_motivation}}
+            </td>
+        </tr>
+        <tr>
+            <td >
+              <p>Концентрация</p>
+            </td>
+            <td align="center">
+              {{evaluation.player_concentration}}
+            </td>
+            <td align="center">
+              {{evaluation.coach_concentration}}
+            </td>
+          </tr>
+
+          <tr>
+            <td >
+              <p>Дисциплина</p>
+            </td>
+            <td align="center">
+              {{evaluation.player_discipline}}
+            </td>
+            <td align="center">
+              {{evaluation.coach_discipline}}
+            </td>
+          </tr>
+
+          <tr>
+            <td >
+              <p>Упоритост/Усилия</p>
+            </td>
+            <td align="center">
+              {{evaluation.player_effort}}
+            </td>
+            <td align="center">
+              {{evaluation.coach_effort}}
+            </td>
+          </tr>
+
+          <tr>
+            <td >
+              <p>Разбиране и изпълнение</p>
+              <p> на задачите по време</p>
+              <p> на тренировка</p>
+            </td>
+            <td align="center">
+              {{evaluation.player_understanding}}
+            </td>
+            <td align="center">
+              {{evaluation.coach_understanding}}
+            </td>
+          </tr>
+    </table>
+
+    <h3>Обратна връзка Играч:</h3>
+    <p>{{evaluation.player_feedback|linebreaksbr}}</p>
+
+    <h3>Обратна връзка треньор:</h3>
+    <p>{{evaluation.coach_feedback|linebreaksbr}}</p>
+
+
+</div>

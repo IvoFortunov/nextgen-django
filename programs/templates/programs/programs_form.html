@@ -1,0 +1,55 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="container">
+  <div class="layout">
+    <div class="column column--1of3">    
+    </div>
+    <div class="column column--2of3">
+            
+            <table class="eval__table">
+                               
+                <tr>
+                    <td class="settings__thumbnail">
+                        <a class="backButton" href="{%url 'programs-admin'%}"><i class="zmdi zmdi-caret-left-circle zmdi-hc-3x"></i></a>
+                    </td>
+        
+                    <td class="settings__tableInfo">
+                    <h3>Програма</h3>
+                    </td>
+    
+                </tr>
+          
+              </table>
+
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+               
+                {% for field in p_form %}
+                <div class="form__field">
+                    <label for="formInput#text">{{field.label}}: </label>
+                    {{field}}
+                </div>               
+                {% endfor %}
+                
+                <div class="form__field">
+                    <label for="formInput#text">{{i_form.images.label}}: </label>
+                    {{i_form.images}}
+                </div>              
+
+
+                <input class="btn btn--sub btn--lg  my-md" type="submit" value="Запиши" />
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.onload = function(){
+     document.getElementById("id_images").removeAttribute("required");      
+    }   
+  </script>
+{% endblock content%}
+

@@ -1,0 +1,42 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<main class="formPage my-xl">
+    <div class="content-box">
+        <div class="formWrapper">
+
+            <table class="settings__table">
+                               
+                <tr>
+                  <td class="settings__thumbnail">
+                    <a class="backButton" href="{%url 'news'%}"><i class="zmdi zmdi-caret-left-circle zmdi-hc-3x"></i></a>
+                  </td>
+                  <td class="settings__tableInfo">
+                    {% if isCoach %}
+                      <h3>Добавяне на треньор</h3>
+                    {% else %}
+                      <h3>Добавяне на играч</h3>
+                    {% endif %}
+                  </td>
+                </tr>
+          
+              </table>
+
+            <form method="POST"  enctype="multipart/form-data">
+                {% csrf_token %}
+                <!-- Input:Text -->
+                {% for field in form %}
+                <div class="form__field">
+                    <label for="formInput#text">{{field.label}}: </label>
+                    {{field}}
+                </div>               
+                {% endfor %}
+          
+                <input class="btn btn--sub btn--lg  my-md" type="submit" value="Запиши" />
+            </form>
+        </div>
+    </div>
+</main>
+
+{% endblock content%}

@@ -1,0 +1,34 @@
+{% extends 'main.html' %}
+
+{% block content %}
+ <!-- Search Result: DevList -->
+ <section class="newslist">
+    <div class="container">
+      <div class="grid grid--three">
+        {% for n in news %}
+        <div class="column card">
+          <div class="news">
+            <a href="{% url 'news-detail' n.id %}" class="card__body">
+              <div class="news__profile">
+                <img class="news__thumbnail" src="{{ n.image.url }}" alt="image" />                
+              </div>
+              <small>Автор:
+                {{n.author.name}},
+                 
+                {{n.created.date}}
+              </small>
+              <div class="news__meta">
+                <h3>{{n.title}}</h3>
+              </div>
+              
+            </a>
+          </div>
+        </div>
+        {% endfor %}
+          
+          
+      </div>
+    </div>
+  </section>
+
+{% endblock content %}

@@ -1,0 +1,56 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="layout">
+      <div class="column column--1of3">
+        <div class="card text-center">
+            <div class="card__body dev">
+                <a class="btn btn--sub btn--md" href="{% url 'create-news'%}"><i class="im im-edit"></i>Нова новина</a>
+              </div>
+            <div class="hero-section__search">
+                <form id="searchForm" class="form" action="" method="get">
+                <div class="form__field">
+                    <label for="formInput#search">Търси новина</label>
+                    <input class="input input--text" id="formInput#search" type="text" name="search_query" value="{{search_query}}"
+                    placeholder="Търси в заглавие" />
+                </div>
+    
+                <input class="btn btn--sub btn--md" type="submit" value="Търси" />
+                </form>
+            </div>
+         
+
+        </div>
+      </div>
+      <div class="column column--2of3">
+        <h3>Новини</h3>
+        <table class="settings__table">
+            {% for n in news %}                                   
+            <tr>
+            <td class="settings__tableInfo">    
+                <p> 
+                {{n}}
+                </p>  
+            </td>
+
+            <td class="settings__tableActions">
+                <a class="tag tag--pill tag--main settings__btn" href="{% url 'edit-news' n.id %}"><i class="im im-edit"></i>Редакция</a>
+            </td>
+           
+            <td class="settings__tableActions">
+                <a class="tag tag--pill tag--main settings__btn" href="{% url 'delete-news' n.id %}"><i class="im im-edit"></i>Изтрий</a>
+            </td>
+            </tr>
+            {% endfor %}
+             
+        </table>
+        {% include 'pagination.html' with queryset=evaluations custom_range=custom_range %}
+      </div>    
+    </div>  
+</div>
+
+
+
+{% endblock content %}

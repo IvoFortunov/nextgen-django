@@ -1,0 +1,41 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<main class="newsDetail my-md">
+    <div class="container">
+      <div class="layout">
+        <div class="column column--1of3">
+          
+        </div>
+        <div class="column column--2of3">  
+            <div class="slideshow-container">
+          
+            {% for image in images %}
+            <div class="mySlides fade">
+                <img class="slideImg" src="{{image.images.url}}" alt="news thumbnail" />
+            </div>
+            {% endfor %}
+             <!-- Next and previous buttons -->
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            </div>
+            
+            <!-- The dots/circles -->
+            <div style="text-align:center">
+                {% for image in images %}
+                <span class="dot" onclick="currentSlide({{ forloop.counter }})"></span>
+                {% endfor %}
+            </div>
+          
+          <h2 class="newsDetail__title">{{program.name}}</h2>
+
+          <div class="newsDetail__info">
+            {{program.description|linebreaksbr}}
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </main>
+
+{% endblock content %}

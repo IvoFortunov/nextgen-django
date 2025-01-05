@@ -1,0 +1,47 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="container">
+  <div class="layout">
+    <div class="column column--1of3">    
+    </div>
+    <div class="column column--2of3">
+            
+            <table class="eval__table">
+                               
+                <tr>
+                  <td class="settings__thumbnail">
+                    <a class="backButton" href="{%url 'playersotwadmin'%}"><i class="zmdi zmdi-caret-left-circle zmdi-hc-3x"></i></a>
+                  </td>
+                 
+                    <td class="settings__tableInfo">
+                      {% if isNew %}
+                      <h3>Нов играч на седмицата</h3>
+                      {% else %}
+                      <h3>Редакция на играч на седмицата</h3>
+                      {% endif %}
+                    </td>              
+                </tr>
+          
+              </table>
+
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+               
+                {% for field in form %}
+                <div class="form__field">
+                    <label for="formInput#text">{{field.label}}: </label>
+                    {{field}}
+                </div>               
+                {% endfor %}
+           
+                <a class="btn btn--sub btn--lg  my-md" href="{%url 'playersotwadmin'%}">Затвори</a>     
+                <input class="btn btn--sub btn--lg  my-md" type="submit" value="Запиши" />
+
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content%}

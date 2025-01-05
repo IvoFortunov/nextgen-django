@@ -1,0 +1,33 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<main class="home">
+    <section class="devlist">
+      <div class="container">
+        <div class="grid grid--three">
+        {% for player in players %}
+          <div class="column card">
+            <div class="dev">
+              <a href="{% url 'user-profile' player.player.id %}" class="card__body">
+                <div class="dev__profile">
+                  <img class="avatar avatar--lg" src="{{player.player.profile_image.url}}" alt="image" />
+                  <div class="dev__meta">
+                    <h3>{{player.player.name}}</h3>
+                    <h5>{{player.player.intro}}</h5>
+                  </div>
+                </div>
+                <p class="dev__info">
+                    Седмица: {{player.week}}, Година: {{player.year}}
+                </p>
+                
+              </a>
+            </div>
+          </div>
+        {% endfor %}
+        </div>
+      </div>
+    </section>
+
+
+  </main>
+{% endblock content %}

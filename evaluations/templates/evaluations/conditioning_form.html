@@ -1,0 +1,213 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="container">
+  <div class="layout">
+    <div class="column column--1of3">    
+    </div>
+    <div class="column column--2of3">
+            
+      <table class="eval__table">
+                               
+        <tr>
+          <td class="settings__thumbnail">
+            <a class="backButton" href="{%url 'conditioning-evaluations'%}"><i class="zmdi zmdi-caret-left-circle zmdi-hc-3x"></i></a>
+          </td>                
+          {% if not viewOnly %}
+          <td class="settings__tableInfo">
+            {% if isNew %}
+            <h3>Нова оценка</h3>
+            {% else %}
+            <h3>Редакция на оценка</h3>
+            {% endif %}
+          </td>
+          {% else %}
+            <td class="settings__tableInfo">
+              <h3>Преглед на оценка</h3>
+            </td>
+          {% endif %}             
+        </tr>
+  
+      </table>
+
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form__field">
+                  <label for="formInput#text">Играч: </label>
+                  {{form.player}}
+                </div> 
+                <div class="form__field">
+                  <label for="formInput#text">Треньор: </label>
+                  {{form.coach}}
+                </div> 
+                               
+                <div class="form__field">
+                  <label for="formInput#text">Година: </label>
+                  {{form.year}}
+                </div> 
+                <div class="form__field">
+                  <label for="formInput#text">Седмица: </label>
+                  {{form.week}}
+                </div> 
+                <table class="eval__table">
+                  <tr>
+                    <th>Критерии</th>
+                    <th>Пн</th>
+                    <th>Вт</th>
+                    <th>Ср</th>
+                    <th>Чт</th>
+                    <th>Пт</th>
+                    <th>Сб</th>
+                    <th>Нд</th>
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <p>Тренировка</p>
+                    </td>
+                    <td>
+                      {{form.mon_practice}}
+                    </td>
+                    <td>
+                        {{form.tue_practice}}
+                    </td>
+                    <td>
+                        {{form.wed_practice}}
+                    </td>
+                    <td>
+                        {{form.thu_practice}}
+                    </td>
+                    <td>
+                        {{form.fri_practice}}
+                    </td>
+                    <td>
+                        {{form.sat_practice}}
+                    </td>
+                    <td>
+                        {{form.sun_practice}}
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <p>Концентрация</p>
+                    </td>
+                    <td>
+                      {{form.mon_concentration}}
+                    </td>
+                    <td>
+                        {{form.tue_concentration}}
+                    </td>
+                    <td>
+                        {{form.wed_concentration}}
+                    </td>
+                    <td>
+                        {{form.thu_concentration}}
+                    </td>
+                    <td>
+                        {{form.fri_concentration}}
+                    </td>
+                    <td>
+                        {{form.sat_concentration}}
+                    </td>
+                    <td>
+                        {{form.sun_concentration}}
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <p>Сън</p>
+                    </td>
+                    <td>
+                      {{form.mon_sleep}}
+                    </td>
+                    <td>
+                        {{form.tue_sleep}}
+                    </td>
+                    <td>
+                        {{form.wed_sleep}}
+                    </td>
+                    <td>
+                        {{form.thu_sleep}}
+                    </td>
+                    <td>
+                        {{form.fri_sleep}}
+                    </td>
+                    <td>
+                        {{form.sat_sleep}}
+                    </td>
+                    <td>
+                        {{form.sun_sleep}}
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <p>Диета</p>
+                    </td>
+                    <td>
+                      {{form.mon_diet}}
+                    </td>
+                    <td>
+                        {{form.tue_diet}}
+                    </td>
+                    <td>
+                        {{form.wed_diet}}
+                    </td>
+                    <td>
+                        {{form.thu_diet}}
+                    </td>
+                    <td>
+                        {{form.fri_diet}}
+                    </td>
+                    <td>
+                        {{form.sat_diet}}
+                    </td>
+                    <td>
+                        {{form.sun_diet}}
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <p>Стречинг</p>
+                    </td>
+                    <td>
+                      {{form.mon_recovery}}
+                    </td>
+                    <td>
+                        {{form.tue_recovery}}
+                    </td>
+                    <td>
+                        {{form.wed_recovery}}
+                    </td>
+                    <td>
+                        {{form.thu_recovery}}
+                    </td>
+                    <td>
+                        {{form.fri_recovery}}
+                    </td>
+                    <td>
+                        {{form.sat_recovery}}
+                    </td>
+                    <td>
+                        {{form.sun_recovery}}
+                    </td>
+                  </tr>
+                  
+                
+                </table>
+
+                {% if viewOnly %}
+                <a class="btn btn--sub btn--lg  my-md" href="{%url 'conditioning-evaluations'%}">Затвори</a>
+                {% else %}
+                <input class="btn btn--sub btn--lg  my-md" type="submit" value="Запиши" />
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content%}

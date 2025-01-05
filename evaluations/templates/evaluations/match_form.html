@@ -1,0 +1,56 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="container">
+  <div class="layout">
+    <div class="column column--1of3">    
+    </div>
+    <div class="column column--2of3">
+            
+            <table class="eval__table">
+                               
+                <tr>
+                  <td class="settings__thumbnail">
+                    <a class="backButton" href="{%url 'match-evaluations'%}"><i class="zmdi zmdi-caret-left-circle zmdi-hc-3x"></i></a>
+                  </td>
+                  {% if not viewOnly %}
+                    <td class="settings__tableInfo">
+                      {% if isNew %}
+                      <h3>Нов мач</h3>
+                      {% else %}
+                      <h3>Редакция на мач</h3>
+                      {% endif %}
+                    </td>
+                    {% else %}
+                      <td class="settings__tableInfo">
+                        <h3>Преглед на мач</h3>
+                      </td>
+                    {% endif %}
+                </tr>
+          
+              </table>
+
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+               
+                {% for field in form %}
+                <div class="form__field">
+                    <label for="formInput#text">{{field.label}}: </label>
+                    {{field}}
+                </div>               
+                {% endfor %}
+
+
+                
+                {% if viewOnly %}
+                <a class="btn btn--sub btn--lg  my-md" href="{%url 'match-evaluations'%}">Затвори</a>
+                {% else %}
+                <input class="btn btn--sub btn--lg  my-md" type="submit" value="Запиши" />
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content%}

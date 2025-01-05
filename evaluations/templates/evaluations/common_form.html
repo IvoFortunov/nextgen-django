@@ -1,0 +1,563 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="container">
+  <div class="layout">
+    <div class="column column--1of3">    
+    </div>
+    <div class="column column--2of3">
+            
+            <table class="eval__table">
+                               
+                <tr>
+                  <td class="settings__thumbnail">
+                    <a class="backButton" href="{%url 'common-evaluations'%}"><i class="zmdi zmdi-caret-left-circle zmdi-hc-3x"></i></a>
+                  </td>                
+                  {% if not viewOnly %}
+                  <td class="settings__tableInfo">
+                    {% if isNew %}
+                    <h3>Нов профил</h3>
+                    {% else %}
+                    <h3>Редакция на профил</h3>
+                    {% endif %}
+                  </td>
+                  {% else %}
+                    <td class="settings__tableInfo">
+                      <h3>Преглед на профил</h3>
+                    </td>
+                  {% endif %}             
+                </tr>
+          
+              </table>
+
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form__field">
+                  <label for="formInput#text" >Играч: </label>
+                  {{form.player}}
+                </div> 
+                <div class="form__field">
+                  <label for="formInput#text" class="bold--text">Моля опишете стила си на игра (на основна линия, сервис, воле и т.н.)</label>
+                  {{form.style}}
+                </div> 
+
+
+                <div class="form__field">
+                  <label for="formInput#text" class="bold--text">Оценете качеството на вашите удари</label>                  
+                </div> 
+               
+                <table class="eval__table">
+                  <tr>
+                    <th>Удари(Техника)</th>
+                    <th>Оценка</th>
+                    <th>Удари(Техника)</th>
+                    <th>Оценка</th>
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <p>Форхенд</p>
+                    </td>
+                    <td>
+                      {{form.quality_forehand}}
+                    </td>
+                    <td >
+                      <p>Лоб с форхенд</p>
+                    </td>
+                    <td>
+                      {{form.quality_forehand_lob}}
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <p>Бекхенд</p>
+                    </td>
+                    <td>
+                      {{form.quality_backhand}}
+                    </td>
+                    <td >
+                      <p>Лоб с бекхенд</p>
+                    </td>
+                    <td>
+                      {{form.quality_backhand_lob}}
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <p>Първи сервис</p>
+                    </td>
+                    <td>
+                      {{form.quality_first_serve}}
+                    </td>
+                    <td >
+                      <p>Къса топка</p>
+                    </td>
+                    <td>
+                      {{form.quality_drop_shot}}
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <p>Втори сервис</p>
+                    </td>
+                    <td>
+                      {{form.quality_second_serve}}
+                    </td>
+                    <td >
+                      <p>Лифтиран форхенд</p>
+                    </td>
+                    <td>
+                      {{form.quality_forehand_topspin}}
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <p>Ретур на първи сервис</p>
+                    </td>
+                    <td>
+                      {{form.quality_receive_first_serve}}
+                    </td>
+                    <td >
+                      <p>Лифтиран бекхенд</p>
+                    </td>
+                    <td>
+                      {{form.quality_backhand_topspin}}
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <p>Ретур на втори сервис</p>
+                    </td>
+                    <td>
+                      {{form.quality_receive_second_serve}}
+                    </td>
+                    <td >
+                      <p>Слайс форхенд</p>
+                    </td>
+                    <td>
+                      {{form.quality_forehand_slice}}
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <p>Форхенд воле</p>
+                    </td>
+                    <td>
+                      {{form.quality_forehand_volley}}
+                    </td>
+                    <td >
+                      <p>Слайс бекхенд</p>
+                    </td>
+                    <td>
+                      {{form.quality_backhand_slice}}
+                    </td>
+                  </tr>
+                  
+                  <tr>
+                    <td >
+                      <p>Бекхенд воле</p>
+                    </td>
+                    <td>
+                      {{form.quality_backhand_volley}}
+                    </td>
+                    <td >
+                      <p>Минаващ удар с форхенд</p>
+                    </td>
+                    <td>
+                      {{form.quality_forehand_passing_shot}}
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <p>Смач</p>
+                    </td>
+                    <td>
+                      {{form.quality_smash}}
+                    </td>
+                    <td >
+                      <p>Минаващ удар с бекхенд</p>
+                    </td>
+                    <td>
+                      {{form.quality_backhand_passing_shot}}
+                    </td>
+                  </tr>
+                 
+                </table>
+
+                <div class="form__field">
+                  <label for="formInput#text" class="bold--text">Кой е вашият най-сигурен (най-системен) удар?</label>
+                  {{form.best_shot}}
+                </div> 
+
+                <div class="form__field">
+                  <label for="formInput#text" class="bold--text">С кой удар се чувствате най-сигурни, за да изпълните завършващ удар?</label>
+                  {{form.best_shot_for_winner}}
+                </div> 
+
+                <div class="form__field">
+                  <label for="formInput#text" class="bold--text">Кой удар усъвършенствате в момента?</label>
+                  {{form.shot_improved}}
+                </div> 
+
+                <div class="form__field">
+                  <label for="formInput#text" class="bold--text">Печелите повече точки</label>
+                  {{form.more_points_won}}
+                </div> 
+
+                <div class="form__field">
+                  <label for="formInput#text" class="bold--text">В коя област сте най-силни/ най-слаби?</label>                  
+                </div> 
+               
+                <table class="eval__table">
+                  <tr>
+                    <th>Област</th>
+                    <th>Оценка</th>          
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <p>Техника</p>
+                    </td>
+                    <td>
+                      {{form.technical}}
+                    </td>                  
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <p>Тактика</p>
+                    </td>
+                    <td>
+                      {{form.tactical}}
+                    </td>                  
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <p>Начин на мислене(психологическа нагласа)</p>
+                    </td>
+                    <td>
+                      {{form.mental}}
+                    </td>                  
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <p>Състояние</p>
+                    </td>
+                    <td>
+                      {{form.condition}}
+                    </td>                  
+                  </tr>
+                 
+                </table>
+
+                <div class="form__field">
+                  <label for="formInput#text" class="bold--text">Оценете качеството на следните области на вашата игра</label>                  
+                </div> 
+               
+                <table class="eval__table">
+                  <tr>
+                    <th>Игрова ситуация</th>
+                    <th>Оценка</th>          
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <p>Сервис</p>
+                    </td>
+                    <td>
+                      {{form.serve}}
+                    </td>                  
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <p>Ретур</p>
+                    </td>
+                    <td>
+                      {{form.receiving}}
+                    </td>                  
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <p>Игра на основна линия</p>
+                    </td>
+                    <td>
+                      {{form.base_line}}
+                    </td>                  
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <p>Излизане и игра на мрежата</p>
+                    </td>
+                    <td>
+                      {{form.net}}
+                    </td>                  
+                  </tr>
+                 
+                </table>
+
+                <div class="form__field">
+                  <label for="formInput#text" class="bold--text">Какво е вашето физическо състояние? Оценете качеството на следните фактори, влияещи върху физическото ви състояние</label>                  
+                </div> 
+               
+                <table class="eval__table">
+                  <tr>
+                    <th>Фактори</th>
+                    <th>Оценка</th>          
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <p>Сила</p>
+                    </td>
+                    <td>
+                      {{form.strength}}
+                    </td>                  
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <p>Бързина</p>
+                    </td>
+                    <td>
+                      {{form.speed}}
+                    </td>                  
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <p>Издържливост</p>
+                    </td>
+                    <td>
+                      {{form.endurance}}
+                    </td>                  
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <p>Гъвкавост</p>
+                    </td>
+                    <td>
+                      {{form.agility}}
+                    </td>                  
+                  </tr>
+                 
+                </table>
+
+                <div class="form__field">
+                  <label for="formInput#text" class="bold--text">Оценете следните умствени фактори</label>                  
+                </div> 
+               
+                <table class="eval__table">
+                  <tr>
+                    <th>Умствени фактори</th>
+                    <th>Оценка</th>          
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <p>Концентрация</p>
+                    </td>
+                    <td>
+                      {{form.concentration}}
+                    </td>                  
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <p>Управление на грешките</p>
+                    </td>
+                    <td>
+                      {{form.error_handling}}
+                    </td>                  
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <p>Упоритост/усилия</p>
+                    </td>
+                    <td>
+                      {{form.effort}}
+                    </td>                  
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <p>Наслаждаване на играта</p>
+                    </td>
+                    <td>
+                      {{form.pleasure}}
+                    </td>                  
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <p>Спортни умения</p>
+                    </td>
+                    <td>
+                      {{form.skill}}
+                    </td>                  
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <p>Емоционална стабилност</p>
+                    </td>
+                    <td>
+                      {{form.mental_stabillity}}
+                    </td>                  
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <p>Самоувереност</p>
+                    </td>
+                    <td>
+                      {{form.confidence}}
+                    </td>                  
+                  </tr>
+                 
+                </table>
+
+                <div class="form__field">
+                  <label for="formInput#text" class="bold--text">Оценете следните тактически фактори</label>                  
+                </div> 
+               
+                <table class="eval__table">
+                  <tr>
+                    <th>Тактически фактори</th>
+                    <th>Оценка</th>          
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <p>Промяна на стила на игра</p>
+                    </td>
+                    <td>
+                      {{form.style_change}}
+                    </td>                  
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <p>Атака</p>
+                    </td>
+                    <td>
+                      {{form.attack}}
+                    </td>                  
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <p>Защита</p>
+                    </td>
+                    <td>
+                      {{form.defence}}
+                    </td>                  
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <p>Забавяне на играта, когато е нужно</p>
+                    </td>
+                    <td>
+                      {{form.delay}}
+                    </td>                  
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <p>Нарушаване на ритъма на противника</p>
+                    </td>
+                    <td>
+                      {{form.break_rhythm}}
+                    </td>                  
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <p>Забързване на играта</p>
+                    </td>
+                    <td>
+                      {{form.speedup}}
+                    </td>                  
+                  </tr>
+
+                  <tr>
+                    <td >
+                      <p>Предусещане</p>
+                    </td>
+                    <td>
+                      {{form.sence}}
+                    </td>                  
+                  </tr>
+                 
+                </table>
+
+                <div class="form__field">
+                  <label for="formInput#text" class="bold--text">Какви са краткосрочните ви цели в следните области?</label>                  
+                </div> 
+
+                <div class="form__field">
+                  <label for="formInput#text">Технически</label>
+                  {{form.short_term_goal_technical}}
+                </div> 
+                <div class="form__field">
+                  <label for="formInput#text">Тактически</label>
+                  {{form.short_term_goal_tactical}}
+                </div> 
+                <div class="form__field">
+                  <label for="formInput#text">Физически</label>
+                  {{form.short_term_goal_physical}}
+                </div> 
+                <div class="form__field">
+                  <label for="formInput#text">Мач/Състезания</label>
+                  {{form.short_term_goal_competition}}
+                </div> 
+
+                <div class="form__field">
+                  <label for="formInput#text" class="bold--text">Какви са дългосрочните ви цели в следните области?</label>                  
+                </div> 
+
+                <div class="form__field">
+                  <label for="formInput#text">Технически</label>
+                  {{form.long_term_goal_technical}}
+                </div> 
+                <div class="form__field">
+                  <label for="formInput#text">Тактически</label>
+                  {{form.long_term_goal_tactical}}
+                </div> 
+                <div class="form__field">
+                  <label for="formInput#text">Физически</label>
+                  {{form.long_term_goal_physical}}
+                </div> 
+                <div class="form__field">
+                  <label for="formInput#text">Мач/Състезания</label>
+                  {{form.long_term_goal_competition}}
+                </div> 
+
+
+                
+                {% if viewOnly %}
+                <a class="btn btn--sub btn--lg  my-md" href="{%url 'common-evaluations'%}">Затвори</a>
+                {% else %}
+                <input class="btn btn--sub btn--lg  my-md" type="submit" value="Запиши" />
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content%}

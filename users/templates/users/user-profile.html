@@ -1,0 +1,72 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block content %}
+<main class="profile my-md">
+    <div class="container">
+      <div class="layout">
+        <div class="column column--1of3">
+          <div class="card text-center">
+            <div class="card__body dev">
+              <img class="avatar avatar--xl" src="{{profile.profile_image.url}}" />
+              <h2 class="dev__name">{{profile.name}}</h2>
+              <p class="dev__title">{{profile.intro}}</p>
+              <p class="dev__location">{{profile.location}}</p>
+              {% if not profile.is_coach %}
+              <p class="potw__container">
+                  <img class="potw" src="{% static 'images/potw.svg' %}"/>
+                  Играч на седмицата: {{potw_count}} път{% if not potw_count == 1 %}и{% endif %}
+              </p>
+              {% endif %}
+              <ul class="dev__social">
+                {% if profile.social_facebook %}
+                    <li>
+                    <a title="Facebook" href="{{profile.social_facebook}}" target="_blank"><i class="zmdi zmdi-facebook zmdi-hc-lg"></i></a>
+                    </li>
+                {% endif %}
+                {% if profile.social_instagram %}
+                    <li>
+                    <a title="Facebook" href="{{profile.social_instagram}}" target="_blank"><i class="zmdi zmdi-instagram zmdi-hc-lg"></i></a>
+                    </li>
+                {% endif %}
+               
+              </ul>
+              {% if request.user.is_authenticated and request.user.profile.id != profile.id %}
+              <a href="{% url 'create-message' profile.id %}" class="btn btn--sub btn--lg">Изпрати съобщение </a>
+              {% endif %}
+              {% if request.user.is_staff %}
+                <a href="{% url 'delete-user' profile.id%}?next={% url 'user-profile' profile.id%}" class="btn btn--sub btn--lg">Изтрий потребител </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="column column--2of3">
+            <div class="devInfo">
+                <h3 class="devInfo__title">За Мен</h3>
+                <p class="devInfo__about">
+                    {{profile.bio}}
+                </p>
+            </div>
+
+          {% if not profile.is_coach %}
+          <div class="devInfo__skills">                                  
+                <div class="devSkill">
+                    <h4 class="devSkill__title">Играеща ръка:</h4>
+                    <p class="devSkill__info">
+                        {{profile.get_hand_display}}
+                    </p>
+                </div>
+                <div class="devSkill">
+                    <h4 class="devSkill__title">Бекхенд:</h4>
+                    <p class="devSkill__info">
+                        {{profile.get_backhand_display}}
+                    </p>
+                </div>
+            </div>
+          {%endif%}
+        </div>
+      </div>
+    </div>
+  </main>
+{% endblock content %}

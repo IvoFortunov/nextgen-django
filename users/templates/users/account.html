@@ -1,0 +1,69 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+  <!-- Main Section -->
+  <main class="settingsPage profile my-md">
+    <div class="container">
+      <div class="layout">
+        <div class="column column--1of3">
+          <div class="card text-center">
+            <div class="card__body dev">
+              <a class="tag tag--pill tag--main settings__btn" href="{% url 'edit-account' %}"><i class="im im-edit"></i> Редакция</a>
+              <a class="tag tag--pill tag--main settings__btn" href="{% url 'change-password' %}"><i class="im im-edit"></i> Смяна на парола</a>
+              <img class="avatar avatar--xl dev__avatar" src="{{profile.profile_image.url}}" />
+              <h2 class="dev__name">{{profile.name}}</h2>
+              <p class="dev__title">{{profile.интро}}</p>
+              <p class="dev__location">{{profile.location}}</p>
+             <ul class="dev__social">
+                {% if profile.social_facebook %}
+                <li>
+                <a title="Facebook" href="{{profile.social_facebook}}" target="_blank"><i class="zmdi zmdi-facebook zmdi-hc-lg"></i></a>
+                </li>
+            {% endif %}
+            {% if profile.social_instagram %}
+                <li>
+                <a title="Facebook" href="{{profile.social_instagram}}" target="_blank"><i class="zmdi zmdi-instagram zmdi-hc-lg"></i></a>
+                </li>
+            {% endif %}
+              </ul>
+             
+            </div>
+          </div>
+        </div>
+        <div class="column column--2of3">
+          <div class="devInfo">
+            <h3 class="devInfo__title">За Мен</h3>
+            <p class="devInfo__about">
+              {{profile.bio}}
+            </p>
+          </div>
+
+          <div class="devInfo__skills">  
+            <div class="devSkill">
+                <h4 class="devSkill__title">Дата на раждане:</h4>
+                <p class="devSkill__info">
+                    {{profile.date_of_birth}}
+                </p>
+            </div>                                
+            <div class="devSkill">
+                <h4 class="devSkill__title">Играеща ръка:</h4>
+                <p class="devSkill__info">
+                    {{profile.get_hand_display}}
+                </p>
+            </div>
+            <div class="devSkill">
+                <h4 class="devSkill__title">Бекхенд:</h4>
+                <p class="devSkill__info">
+                    {{profile.get_backhand_display}}
+                </p>
+            </div>
+        </div>
+          
+        </div>
+      </div>
+    </div>
+  </main>
+
+  {% endblock content %}
+
